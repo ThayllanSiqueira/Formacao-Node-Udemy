@@ -1,14 +1,13 @@
 const express = require("express");
 const app = express();
 
-app.set('view engine', 'ejs');
-app.use(express.static('public'));
+// Estou dizendo para o Express usar o EJS como View engine
+app.set('view engine','ejs');
 
-app.get("/:nome/:lang", (req, res) => {
-    //res.send("Bem vindo ao site!");
-    let nome = req.params.nome;
-    let lang = req.params.lang;
-    let exibirMsg = true;
+app.get("/:nome/:lang",(req, res) => {
+    var nome = req.params.nome;
+    var lang = req.params.lang;
+    var exibirMsg = false;
 
     var produtos = [
         {nome: "Doritos",preco: 3.14},
@@ -19,14 +18,14 @@ app.get("/:nome/:lang", (req, res) => {
         {nome: "Nescau", preco: 4}
     ]
 
-    res.render("index", {
+    res.render("index",{
         nome: nome,
         lang: lang,
-        empresa: "Cleversystems",
-        inscritos: 100000,
+        empresa: "Guia do programador",
+        inscritos: 8040,
         msg: exibirMsg,
         produtos: produtos
     });
 });
 
-app.listen(8080, () => { console.log("App Rodando..."); });
+app.listen(8080,()=>{console.log("App rodando!");});
