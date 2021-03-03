@@ -1,0 +1,4 @@
+Deploy realizado na DigitalOcean com teste de 30 dias gratis pelo link que o curso fornece.
+Usando a lib pm2 para rodar o node em background.
+Instalação feita pelo putty e filezila.
+Realizado a instalação do node e mysql bem como a configuração dos mesmos.
