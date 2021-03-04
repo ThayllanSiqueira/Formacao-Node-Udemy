@@ -3,6 +3,14 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const conn = require("./database/database");
 
+// controllers
+const categoriesController = require("./categories/CategoriesController")
+const articlesController = require("./articles/ArticlesController")
+
+// models
+const Article = require("./articles/Article");
+const Category = require("./categories/Category");
+
 // Inicializando o express
 const app = express();
 
@@ -24,6 +32,11 @@ conn.authenticate()
     .catch(err => {
         console.log(err);
     });
+
+
+//Rotas
+app.use("/", categoriesController);
+app.use("/", articlesController);
 
 app.get("/", (req, res) => {
     res.render("index");
