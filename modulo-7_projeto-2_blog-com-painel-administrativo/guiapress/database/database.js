@@ -4,7 +4,8 @@ const conn = new Sequelize('guiapress', 'root', '',{
     dialect: 'mysql',
     dialectOptions: {
         charset: 'utf8'
-    }
+    },
+    timezone: "-03:00"
 });
 
 module.exports = conn;
