@@ -4,12 +4,14 @@ const bodyParser = require("body-parser");
 const conn = require("./database/database");
 
 // controllers
-const categoriesController = require("./categories/CategoriesController")
-const articlesController = require("./articles/ArticlesController")
+const categoriesController = require("./categories/CategoriesController");
+const articlesController = require("./articles/ArticlesController");
+const usersController = require("./users/UserController");
 
 // models
 const Article = require("./articles/Article");
 const Category = require("./categories/Category");
+const User = require("./users/User");
 
 // Inicializando o express
 const app = express();
@@ -37,12 +39,14 @@ conn.authenticate()
 //Rotas
 app.use("/", categoriesController);
 app.use("/", articlesController);
+app.use("/", usersController);
 
 app.get("/", (req, res) => {
     Article.findAll({
         order: [
             ['id', 'DESC']
-        ]
+        ],
+        limit: 4
     }).then(articles => {
         Category.findAll().then(categories => {
             res.render("index",{articles: articles, categories: categories});

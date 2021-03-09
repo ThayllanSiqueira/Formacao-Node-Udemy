@@ -63,7 +63,7 @@ router.get("/admin/articles/edit/:id", (req, res) =>{
     Article.findByPk(id).then(article => {
         if(article != undefined){
             Category.findAll().then(categories => {
-                res.render("admin/articles/edit", { categories: categories });
+                res.render("admin/articles/edit", { categories: categories, article: article  });
             });
         } else {
             res.redirect("/admin/articles");
@@ -72,5 +72,64 @@ router.get("/admin/articles/edit/:id", (req, res) =>{
         res.redirect("/admin/articles");
     })
 });
+
+router.post("/articles/update", (req, res) =>{
+    var id = req.body.id;
+    var title = req.body.title; 
+    var body = req.body.body; 
+    var category = req.body.category; 
+    Article.update({
+        title: title,
+        slug: slugify(title),
+        body: body,
+        categoreId: category
+    },  {
+            where: {
+                id: id
+            }
+    })
+    .then(() => {
+        res.redirect("/admin/articles");
+    });
+});
+
+router.get("/articles/page/:num", (req, res) =>{
+    var page = req.params.num;
+    var offset = 0;
+
+    if(isNaN(page) || page == 1){
+        offset = 0
+    }else {
+        offset = (parseInt(page) -1) * 4;
+    }
+
+    Article.findAndCountAll({
+        order: [
+            ['id', 'DESC']
+        ],
+        limit: 4,
+        offset: offset
+    }).then(articles =>{
+
+        var next;
+        if(offset + 4 >= articles.count){
+            next = false;
+        }else {
+            next = true;
+        }
+
+        var result = {
+            page: parseInt(page),
+            next: next,
+            articles: articles
+        }
+
+        Category.findAll().then(categories => {
+            res.render("admin/articles/page",{result: result, categories: categories});
+        });
+    });
+    
+});
+
 
 module.exports = router;
