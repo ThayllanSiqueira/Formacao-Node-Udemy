@@ -1,0 +1,8 @@
+deploy da aplicação guiapress em um servidor na nuvem Umbler
+
+Deploy realizado na Umble com teste de R$100 pelo link que o curso fornece.
+utilizando git para enviar o projeto para Umbler
+utilizando HeidiSQL para exportar dados para o banco de dados da Umbler
+
+Simples de realizar o deploy, aulas bem explicativas.
+
