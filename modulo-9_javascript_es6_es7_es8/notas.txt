@@ -1,3 +1,15 @@
 Novidades Javascript ES6, ES7 e ES8
 
 * A partir da versão ES8, fala-se ES2018, ES2019, etc...
+
+* Diferença entre var e let
+    - Escopo
+    - var => Global / Local
+    - let => Global / Local / Blocos
+
+* Parametros opcionais
+    - Sempre vir por ultimos os parametros opcionais
+
+* Arrow Functions
+    - Diferença apenas na escrita - reduz a quantidade de escrita + alguns recursos de OO
+    - Apenas podem ser usadas em callbacks ou guardada em variáveis
