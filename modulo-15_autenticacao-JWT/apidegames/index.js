@@ -98,7 +98,7 @@ app.get("/game/:id", (req, res) => {
 
 });
 
-app.post("/game", (req, res) => {
+app.post("/game", auth, (req, res) => {
     var {title, price, year} = req.body;
 
     //validate

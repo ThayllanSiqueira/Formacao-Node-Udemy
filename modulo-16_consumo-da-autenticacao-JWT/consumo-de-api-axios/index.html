@@ -70,7 +70,7 @@
             price: priceInput.value
         }
 
-        axios.post("http://localhost:8166/game", game).then(res => {
+        axios.post("http://localhost:8166/game", game, axiosConfig).then(res => {
             if (res.status == 200) {
                 alert("Game cadastrado com sucesso...");
             }
@@ -82,7 +82,7 @@
     function deleteGame(ListItem){
         var id = ListItem.getAttribute("data-id");
 
-        axios.delete("http://localhost:8166/game/" + id).then(res => {
+        axios.delete("http://localhost:8166/game/" + id, axiosConfig).then(res => {
             if (res.status == 200) {
                 alert("Game deletado com sucesso...");
             }
