@@ -68,3 +68,41 @@ database.insert(dados).into("games").then(data =>{
 }).catch(err => {
     console.log(err);
 }); */
+
+//ORDER BY
+/* database.select().table("games").orderBy("nome", "asc").then(data => {
+    console.log(data);
+}).catch(err => {
+    console.log(err);
+}); */
+
+//Insert Associados
+/* database.insert({
+    nome: "Blizzard",
+    games_id: 5
+}).table("estudios").then(data =>{
+    console.log(data);
+}).catch(err => {
+    console.log(err);
+}); */
+
+//JOINS
+/* database.select(["estudios.nome as name_estudio","games.id","games.nome as name_game"]).table("games").innerJoin("estudios","estudios.games_id","games.id").then(data =>{
+    console.log(data);
+}).catch(err => {
+    console.log(err);
+}); */
+/* database.select(["games.*","estudios.nome as name_estudio"]).table("games").innerJoin("estudios","estudios.games_id","games.id").then(data =>{
+    console.log(data);
+}).catch(err => {
+    console.log(err);
+}); */
+
+//JOIN COM WHERE
+/* database.select(["games.*","estudios.nome as name_estudio"]).table("games").innerJoin("estudios","estudios.games_id","games.id").where("games.id",5).then(data =>{
+    console.log(data);
+}).catch(err => {
+    console.log(err);
+});  */
+
+//
