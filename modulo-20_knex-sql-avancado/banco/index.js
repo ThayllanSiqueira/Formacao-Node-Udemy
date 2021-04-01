@@ -105,4 +105,61 @@ database.insert(dados).into("games").then(data =>{
     console.log(err);
 });  */
 
-//
+//Relacionamento 1 - M
+/* database.select(["games.*","estudios.nome as name_estudio"]).table("games").innerJoin("estudios","estudios.games_id","games.id").then(data =>{
+    //console.log(data);
+    var estudiosGameArray = data;
+    var game = {
+        id: 0,
+        nome: "",
+        estudios: []
+    }
+    game.id = data[0].id;
+    game.nome = data[0].nome;
+    data.forEach(estudio => {
+        game.estudios.push({nome: estudio.name_estudio});
+    });
+    console.log(game);
+}).catch(err => {
+    console.log(err);
+}); */
+
+// Relacionamento M - M
+/* database("games_estudios").innerJoin("games", "games.id", "games_estudios.game_id").then(data =>{
+    console.log(data);
+}).catch(err => {
+    console.log(err);
+}); */
+
+/* database.select([
+    "estudios.nome as estudio_nome",
+    "games.nome as game_nome",
+    "games.preco"
+]).table("games_estudios")
+.innerJoin("games", "games.id", "games_estudios.game_id")
+.innerJoin("estudios", "estudios.id", "games_estudios.estudio_id")
+//.where("games.id", 7)
+.then(data =>{
+    console.log(data);
+}).catch(err => {
+    console.log(err);
+}); */
+
+//TRANSACTIONS
+/* async function testeTrasacao(){
+    try {
+        await database.transaction(async trans => {
+            await database.insert({nome: "Capcom"}).table("estudios");
+            await database.insert({nome: "Marvel"}).table("estudios");
+            await database.insert({nome: "Conamy"}).table("estudios");
+            await database.insert({nome: "Sony"}).table("estudios");
+            await database.insert({nome: "Gearboxy"}).table("estudios");
+        });    
+    } catch (error) {
+        console.log(error)
+    }
+    
+}
+
+testeTrasacao(); */
+
