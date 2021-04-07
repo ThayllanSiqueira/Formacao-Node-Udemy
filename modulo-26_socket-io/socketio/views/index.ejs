@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Teste</h1>
+    <input oninput="enviar()" type="text" id="palavra">
+    <button >Enviar</button>
+    <!-- <button onclick="enviar()">Enviar</button> -->
+    <hr>
+    <p id="resultado"></p>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+<script>
+    var socket = io("http://localhost:3000");
+
+    socket.on("disconnect", () => {
+        console.log("Desconectado");
+    })
+    socket.emit("boasvindas", {nome: "Thayllan Felipe"});
+
+    socket.on("resultado", (data) =>{
+        console.log(data);
+        var text = document.getElementById("resultado");
+        text.innerHTML = data;
+    })
+
+    function enviar(){
+        var input = document.getElementById("palavra");
+        console.log(input.value);
+        socket.emit("palavra", input.value);
+    }
+</script>
+</html>
