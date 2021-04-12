@@ -13,6 +13,7 @@ app.use(express.json());
 app.set('view engine', 'ejs');
 
 mongoose.connect("mongodb://localhost:27017/agendamento", {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.set('useFindAndModify', false);
 
 app.get("/", (req, res) => {
     res.render("index");
@@ -41,8 +42,39 @@ app.post("/create", async (req, res) => {
 
 app.get("/getcalendar", async (req, res) => {
     var appointments = await AppointmentServices.GetAll(false);
-    res.json(appointments)
+    res.json(appointments);
 });
+
+app.get("/event/:id", async (req, res) => {
+    var appointment = await AppointmentServices.GetById(req.params.id);
+    res.render("event", {appo: appointment});
+});
+
+app.post("/finish", async (req, res) => {
+    var id = req.body.id;
+    var result = await AppointmentServices.Finish(id);
+    res.redirect("/");
+});
+
+app.get("/list", async (req, res) => {
+    var appos = await AppointmentServices.GetAll(true);
+    res.render("list", {appos});
+});
+
+app.get("/searchresult", async (req, res) => {
+    var appos = await AppointmentServices.Search(req.query.search);
+    res.render("list", {appos});
+});
+
+var poolTime = 5 * 60000;
+//var poolTime = 5000;
+
+setInterval(async () => {
+    //console.log("A task Rodou...")
+    await AppointmentServices.SendNotification();
+
+}, poolTime);
+
 
 
 
