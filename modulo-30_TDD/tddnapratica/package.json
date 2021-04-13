@@ -1,0 +1,21 @@
+{
+  "name": "tddnapratica",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node ./src/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^26.6.3"
+  },
+  "dependencies": {
+    "@types/jest": "^26.0.22",
+    "express": "^4.17.1",
+    "supertest": "^6.1.3"
+  }
+}
